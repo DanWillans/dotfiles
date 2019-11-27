@@ -9,7 +9,7 @@ own risk!
 
 Clone the repository.
 ```bash
-git clone https://cc-github.bmwgroup.net/tu-adp-bellman/dotfiles
+git clone https://github.com/DanWillans/dotfiles.git
 ```
 
 Run the install script.

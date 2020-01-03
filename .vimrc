@@ -41,7 +41,7 @@
     if filereadable(expand("~/.vim/autoload/plug.vim"))
         call plug#begin('~/.vim/plugged')
 
-        Plug 'altercation/vim-colors-solarized' " Colorscheme
+        " Plug 'altercation/vim-colors-solarized' " Colorscheme
         Plug 'christoomey/vim-tmux-navigator'   " Seamless vim and tmux split navigation
         Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file opener
         Plug 'easymotion/vim-easymotion'        " Speed of light motion
@@ -67,6 +67,10 @@
         Plug 'bazelbuild/vim-bazel'
         Plug 'blindFS/vim-taskwarrior'
         Plug 'lervag/vimtex'
+        " Plug 'sonph/onehalf'                    " Vim Theme 
+        Plug 'tomasr/molokai'                   " Vim theme
+        Plug 'octol/vim-cpp-enhanced-highlight'   "Vim enhanced highlighting
+        
 
 
         call plug#end()
@@ -168,17 +172,32 @@
 " }
 
 " Solarized Colorscheme {
-    if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=16       " must have solarized palette in
-                                            " terminal emulator to work
-        let g:solarized_termtrans=1
-        let g:solarized_contrast="normal"
-        let g:solarized_visibility="normal"
-        colorscheme solarized
-    endif
+"     if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
+"         let g:solarized_termcolors=16       " must have solarized palette in
+"                                             " terminal emulator to work
+"         let g:solarized_termtrans=1
+"         let g:solarized_contrast="normal"
+"         let g:solarized_visibility="normal"
+"         colorscheme solarized
+"     endif
+"}
 
+" onehalfdark Colorscheme {
+    if filereadable(expand("~/.vim/plugged/onehalfdark/vim/colors/onehalfdark.vim"))
+        syntax on
+        set t_Co=256
+        colorscheme onehalfdark
+    endif
     " colors for vimdiff
     highlight DiffText cterm=none ctermfg=White ctermbg=Red gui=none guifg=White guibg=Red
+" }
+
+" Molokai Colorscheme {
+    " if filereadable(expand("~/.vim/plugged/molokai/colors/molokai.vim"))
+    "     colorscheme molokai
+    " endif
+    " " colors for vimdiff
+    " highlight DiffText cterm=none ctermfg=White ctermbg=Red gui=none guifg=White guibg=Red
 " }
 
 " Formatting {
@@ -449,8 +468,8 @@
         " powerline enabled font.
 
         " See `:echo g:airline_theme_map` for some more choices
-        if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
-            let g:airline_theme = 'solarized'
+        if isdirectory(expand("~/.vim/plugged/onehalf/"))
+            let g:airline_theme = 'onedark'
             let g:airline_powerline_fonts = 1
         endif
     " }
@@ -472,8 +491,16 @@
         endif
     " }
 
-" }
 
+   " vim-cpp-enhanced-highlight {
+        if isdirectory(expand("~/.vim/plugged/vim-cpp-enhanced-highlight/"))
+            let g:cpp_class_scope_hightlight = 1
+            let g:cpp_member_variable_hightlight = 1
+            let g:cpp_class_decl_hightlight = 1
+        endif
+    " }
+
+" }
 " GVim Settings {
     if has('gui_running')
         " Use the Solarized Dark theme

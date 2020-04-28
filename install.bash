@@ -210,12 +210,12 @@ for choice in "${array[@]}"; do
             install_packages
             ;;
         2)
-            install_oh_my_zsh
+#            install_oh_my_zsh
             install_powerline_symbols
             install_fzf
-            install_atom
-            install_googler
-            install_google_chrome
+#            install_atom
+#            install_googler
+#            install_google_chrome
             install_gdbgui
             ;;
         3)

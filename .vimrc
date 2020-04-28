@@ -147,7 +147,9 @@
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=1                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
+    set nofoldenable                " Auto fold code
+    set foldmethod=indent           " Fold on indents
+    set foldlevel=10                " Fold everything indented for more than 1 level
     set list                        " Show “invisible” characters
     set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:.
     set ttyfast                     " Optimize for fast terminal connections
@@ -501,6 +503,7 @@
     " }
 
 " }
+
 " GVim Settings {
     if has('gui_running')
         " Use the Solarized Dark theme

@@ -32,7 +32,6 @@ htop
 openssh-server
 tmuxinator
 tree
-terminator
 meld
 parallel
 xclip
@@ -186,6 +185,8 @@ configure_git() {
 configure_zsh() {
     echo configure zsh
 
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
     cd "$(dirname "${BASH_SOURCE}")";
     cp .zshrc ~
 }
@@ -210,12 +211,12 @@ for choice in "${array[@]}"; do
             install_packages
             ;;
         2)
-#            install_oh_my_zsh
+            install_oh_my_zsh
             install_powerline_symbols
             install_fzf
 #            install_atom
-#            install_googler
-#            install_google_chrome
+            # install_googler
+            # install_google_chrome
             install_gdbgui
             ;;
         3)

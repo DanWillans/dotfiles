@@ -51,7 +51,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode docker)
+plugins=(vi-mode docker web-search git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,7 +78,6 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-eval `dircolors ~/.dir_colors/dircolors`
 
 alias t='tmux attach || tmux new'
 alias tt='tmux attach -t 1 || tmux new -t 0'

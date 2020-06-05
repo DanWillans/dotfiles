@@ -70,6 +70,7 @@
         " Plug 'sonph/onehalf'                    " Vim Theme 
         Plug 'tomasr/molokai'                   " Vim theme
         Plug 'octol/vim-cpp-enhanced-highlight'   "Vim enhanced highlighting
+        Plug 'mileszs/ack.vim'                  " Silversearcher"
         
 
 
@@ -493,7 +494,6 @@
         endif
     " }
 
-
    " vim-cpp-enhanced-highlight {
         if isdirectory(expand("~/.vim/plugged/vim-cpp-enhanced-highlight/"))
             let g:cpp_class_scope_hightlight = 1
@@ -502,6 +502,9 @@
         endif
     " }
 
+   " ack.vim {
+       let g:ackprg = 'ag --nogroup --nocolor --column'
+    " }
 " }
 
 " GVim Settings {

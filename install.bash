@@ -156,6 +156,9 @@ configure_vim() {
     # install vim plugins
     vim "+PlugInstall" "+qa"
 
+    # install color scheme
+    cp -R ~/.vim/plugged/onehalf/vim/colors ~/.vim/
+
     # compile youcompleteme
     cd ~/.vim/plugged/youcompleteme || exit 1
     ./install.py --clang-completer

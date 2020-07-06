@@ -67,7 +67,7 @@
         Plug 'bazelbuild/vim-bazel'
         Plug 'blindFS/vim-taskwarrior'
         Plug 'lervag/vimtex'
-        " Plug 'sonph/onehalf'                    " Vim Theme 
+        Plug 'sonph/onehalf'                    " Vim Theme 
         Plug 'tomasr/molokai'                   " Vim theme
         Plug 'octol/vim-cpp-enhanced-highlight'   "Vim enhanced highlighting
         Plug 'mileszs/ack.vim'                  " Silversearcher"
@@ -186,9 +186,10 @@
 "}
 
 " onehalfdark Colorscheme {
-    if filereadable(expand("~/.vim/plugged/onehalfdark/vim/colors/onehalfdark.vim"))
+    if filereadable(expand("~/.vim/plugged/onehalf/vim/colors/onehalfdark.vim"))
         syntax on
         set t_Co=256
+        set cursorline
         colorscheme onehalfdark
     endif
     " colors for vimdiff

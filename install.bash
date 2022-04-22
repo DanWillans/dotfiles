@@ -204,6 +204,24 @@ configure_zsh() {
     cp .zshrc ~
 }
 
+configure_dwm(){
+    echo configure dwm
+    # Patches
+    patches=(
+    https://dwm.suckless.org/patches/systray/dwm-systray-6.3.diff
+    )
+    pushd ~/.dwm_source/dwm
+    for patch in ${patches[@]}; do
+	    curl ${patch} -o patch.diff
+	    git apply patch.diff
+	    sudo cp config.def.h config.h
+	    sudo make clean install
+	    rm patch.diff
+    done
+}
+
+
+
 IFS=', '
 read -p "Choose your option(s)
 install
@@ -229,7 +247,7 @@ for choice in "${array[@]}"; do
             install_oh_my_zsh
             install_powerline_symbols
             install_fzf
-#            install_atom
+	    # install_atom
             # install_googler
             # install_google_chrome
             install_gdbgui

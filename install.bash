@@ -206,11 +206,13 @@ configure_zsh() {
 
 configure_dwm(){
     echo configure dwm
+    pushd ~/.dwm_source/dwm
+    # Change default terminal to gnome-terminal
+    sed -i 's/"st"/"gnome-terminal"/g' config.def.h
     # Patches
     patches=(
     https://dwm.suckless.org/patches/systray/dwm-systray-6.3.diff
     )
-    pushd ~/.dwm_source/dwm
     for patch in ${patches[@]}; do
 	    curl ${patch} -o patch.diff
 	    git apply patch.diff

@@ -140,6 +140,16 @@ install_gdbgui() {
     pip install gdbgui
 }
 
+install_dwm() {
+    mkdir -p ~/.dwm_source
+    pushd ~/.dwm_source
+    git clone https://git.suckless.org/dwm
+    pushd ./dwm
+    sudo make clean install
+    popd
+    popd
+}
+
 configure_vim() {
     echo configure vim
 
@@ -200,12 +210,14 @@ install
     1) apt packages
     2) other packages
     3) scripts
+    4) dwm
 configure
     10)  vim
     11)  tmux
     12)  git
     13)  zsh
     14)  color scheme
+    15)  dwm
 > " -a array
 
 for choice in "${array[@]}"; do
@@ -225,6 +237,9 @@ for choice in "${array[@]}"; do
         3)
             install_scripts
             ;;
+        4)
+            install_dwm
+            ;;
         10)
             configure_vim
             ;;
@@ -241,10 +256,7 @@ for choice in "${array[@]}"; do
             configure_color_scheme
             ;;
         15)
-            configure_vim
-            configure_tmux
-            configure_git
-            configure_zsh
+            configure_dwm
             ;;
         *)
             echo invalid number

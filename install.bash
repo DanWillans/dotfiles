@@ -39,6 +39,7 @@ python-pip
 gnome-tweak-tool
 vifm
 rename
+suckless-tools
 )
 
 sudo apt update
@@ -168,10 +169,6 @@ configure_vim() {
 
     # install color scheme
     cp -R ~/.vim/plugged/onehalf/vim/colors ~/.vim/
-
-    # compile youcompleteme
-    cd ~/.vim/plugged/youcompleteme || exit 1
-    ./install.py --clang-completer
 }
 
 configure_tmux() {

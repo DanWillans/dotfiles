@@ -16,12 +16,10 @@ curl
 dconf-cli
 exuberant-ctags
 git
-python-dev
 python3-dev
 rsync
 tmux
 tree
-vim-gnome
 xsel
 zsh
 taskwarrior
@@ -35,11 +33,10 @@ tree
 meld
 parallel
 xclip
-python-pip
+python3-pip
 gnome-tweak-tool
 vifm
 rename
-suckless-tools
 )
 
 sudo apt update
@@ -57,6 +54,17 @@ install_scripts() {
 install_oh_my_zsh() {
     echo "install oh my zsh"
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+install_paperwm() {
+    mkdir -p ~/scratch
+    pushd ~/scratch
+    # Required gnome-3.38 for Ubuntu 20.04
+    git clone https://github.com/paperwm/PaperWM.git -b gnome-3.38
+    pushd PaperWM
+    ./install.sh
+    popd
+    popd
 }
 
 install_powerline_symbols() {
@@ -141,16 +149,6 @@ install_gdbgui() {
     pip install gdbgui
 }
 
-install_dwm() {
-    mkdir -p ~/.dwm_source
-    pushd ~/.dwm_source
-    git clone https://git.suckless.org/dwm
-    pushd ./dwm
-    sudo make clean install
-    popd
-    popd
-}
-
 configure_vim() {
     echo configure vim
 
@@ -201,25 +199,6 @@ configure_zsh() {
     cp .zshrc ~
 }
 
-configure_dwm(){
-    echo configure dwm
-    pushd ~/.dwm_source/dwm
-    # Change default terminal to gnome-terminal
-    sed -i 's/"st"/"gnome-terminal"/g' config.def.h
-    # Patches
-    patches=(
-    https://dwm.suckless.org/patches/systray/dwm-systray-6.3.diff
-    )
-    for patch in ${patches[@]}; do
-	    curl ${patch} -o patch.diff
-	    git apply patch.diff
-	    sudo cp config.def.h config.h
-	    sudo make clean install
-	    rm patch.diff
-    done
-}
-
-
 
 IFS=', '
 read -p "Choose your option(s)
@@ -227,14 +206,13 @@ install
     1) apt packages
     2) other packages
     3) scripts
-    4) dwm
+    4) paperwm
 configure
     10)  vim
     11)  tmux
     12)  git
     13)  zsh
     14)  color scheme
-    15)  dwm
 > " -a array
 
 for choice in "${array[@]}"; do
@@ -254,9 +232,9 @@ for choice in "${array[@]}"; do
         3)
             install_scripts
             ;;
-        4)
-            install_dwm
-            ;;
+	4)
+	    install_paperwm
+	    ;;
         10)
             configure_vim
             ;;
@@ -271,9 +249,6 @@ for choice in "${array[@]}"; do
             ;;
         14)
             configure_color_scheme
-            ;;
-        15)
-            configure_dwm
             ;;
         *)
             echo invalid number

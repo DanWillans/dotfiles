@@ -56,7 +56,7 @@
         Plug 'tpope/vim-repeat'                 " Repeatable tpope commands
         Plug 'tpope/vim-surround'               " Parenthesis commands
         Plug 'tpope/vim-unimpaired'             " Pairs of handy bracket mappings
-        Plug 'valloric/youcompleteme'           " Code completion engine!!
+        " Plug 'valloric/youcompleteme'           " Code completion engine!!
         Plug 'vim-airline/vim-airline'          " Statusline
         Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
         Plug 'vim-scripts/argtextobj.vim'       " Argument object
@@ -65,12 +65,11 @@
         Plug 'godlygeek/tabular'                " Text alignment
         Plug 'google/vim-maktaba'
         Plug 'bazelbuild/vim-bazel'
-        Plug 'blindFS/vim-taskwarrior'
         Plug 'lervag/vimtex'
         Plug 'sonph/onehalf'                    " Vim Theme 
         Plug 'tomasr/molokai'                   " Vim theme
         Plug 'octol/vim-cpp-enhanced-highlight'   "Vim enhanced highlighting
-        Plug 'mileszs/ack.vim'                  " Silversearcher"
+        Plug 'jremmen/vim-ripgrep'              "ripgrep"
         
 
 
@@ -208,7 +207,7 @@
     set nowrap                      " Do not wrap long lines
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
-    set expandtab                   " Tabs are spaces, not tabs
+    " set expandtab                   " Tabs are spaces, not tabs
     set tabstop=4                   " An indentation every four columns
     set softtabstop=4               " Let backspace delete indent
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
@@ -503,9 +502,10 @@
         endif
     " }
 
-   " ack.vim {
-       let g:ackprg = 'ag --nogroup --nocolor --column'
-    " }
+       " vim-ripgrep {
+            let g:rg_highlight = 'true'
+            let g:rg_command = 'rg --vimgrep -S --no-ignore'
+       " }
 " }
 
 " GVim Settings {

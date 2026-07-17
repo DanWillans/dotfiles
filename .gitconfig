@@ -1,6 +1,6 @@
 [user]
 	name = Dan Willans
-	email = dwillans@amazon.com
+	email = dan.willans@oxionics.com
 [remote "origin"]
 	prune = true
 [filter "lfs"]

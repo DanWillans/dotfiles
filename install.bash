@@ -25,6 +25,12 @@ zsh
 taskwarrior
 bugwarrior
 silversearcher-ag
+ripgrep
+fd-find
+nodejs
+npm
+unzip
+python3-venv
 redshift
 htop
 openssh-server
@@ -49,6 +55,21 @@ install_scripts() {
     echo "install shell scripts"
     sudo cp bin/viag.sh /usr/local/bin/
     sudo cp bin/vifn.sh /usr/local/bin/
+}
+
+install_dust() {
+    curl -sSfL https://raw.githubusercontent.com/bootandy/dust/refs/heads/master/install.sh | sh
+}
+
+install_neovim() {
+    echo "install neovim"
+    # apt neovim is too old for this config; use the official stable tarball
+    # chain with && so a failed download doesn't wipe the existing install
+    local TARBALL="nvim-linux-x86_64.tar.gz"
+    curl -fsSL "https://github.com/neovim/neovim/releases/latest/download/$TARBALL" -o "/tmp/$TARBALL" \
+        && sudo rm -rf /opt/nvim-linux-x86_64 \
+        && sudo tar -C /opt -xzf "/tmp/$TARBALL"
+    rm -f "/tmp/$TARBALL"
 }
 
 install_oh_my_zsh() {
@@ -169,6 +190,17 @@ configure_vim() {
     cp -R ~/.vim/plugged/onehalf/vim/colors ~/.vim/
 }
 
+configure_nvim() {
+    echo configure nvim
+
+    cd "$(dirname "${BASH_SOURCE}")";
+    mkdir -p ~/.config/nvim
+    cp -r .config/nvim/. ~/.config/nvim/
+
+    # install plugins at the versions pinned in lazy-lock.json
+    PATH="$PATH:/opt/nvim-linux-x86_64/bin" nvim --headless "+Lazy! restore" +qa
+}
+
 configure_tmux() {
     echo configure tmux
 
@@ -207,12 +239,14 @@ install
     2) other packages
     3) scripts
     4) paperwm
+    5) neovim
 configure
     10)  vim
     11)  tmux
     12)  git
     13)  zsh
     14)  color scheme
+    15)  neovim
 > " -a array
 
 for choice in "${array[@]}"; do
@@ -224,17 +258,21 @@ for choice in "${array[@]}"; do
             install_oh_my_zsh
             install_powerline_symbols
             install_fzf
-	    # install_atom
+            install_dust
+            # install_atom
             # install_googler
             # install_google_chrome
-            install_gdbgui
+            # install_gdbgui
             ;;
         3)
             install_scripts
             ;;
-	4)
-	    install_paperwm
-	    ;;
+        4)
+        install_paperwm
+        ;;
+        5)
+            install_neovim
+            ;;
         10)
             configure_vim
             ;;
@@ -249,6 +287,9 @@ for choice in "${array[@]}"; do
             ;;
         14)
             configure_color_scheme
+            ;;
+        15)
+            configure_nvim
             ;;
         *)
             echo invalid number

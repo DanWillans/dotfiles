@@ -129,3 +129,13 @@ function zle-line-finish
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
+
+# uv / rustup PATH setup — guarded, the files only exist once each tool is installed
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# neovim is installed from the official tarball (see install.bash)
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# machine-specific config lives in ~/.zshrc.local — never checked in, never overwritten
+[ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"

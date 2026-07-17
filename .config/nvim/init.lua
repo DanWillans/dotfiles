@@ -38,6 +38,25 @@ map("n", "<leader>/", ":nohlsearch<CR>", { silent = true, desc = "Clear search h
 -- still jumps 10 real lines (matters for relative-number motions).
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+-- Resize submode: <C-w>r enters, then h/j/k/l resize repeatedly (h/l width,
+-- j/k height), any other key exits. Home-row alternative to holding a chord,
+-- since GlazeWM owns M-hjkl and tmux-navigator owns C-hjkl.
+-- Shadows builtin <C-w>r (rotate) — still available on <C-w><C-r>.
+local resize_keys = {
+  h = "vertical resize -2", l = "vertical resize +2",
+  j = "resize -1",          k = "resize +1",
+}
+local function resize_mode()
+  vim.api.nvim_echo({ { "-- RESIZE --  h/j/k/l, any other key exits", "ModeMsg" } }, false, {})
+  while true do
+    vim.cmd.redraw()
+    local ok, key = pcall(vim.fn.getcharstr)  -- pcall: <C-c> raises instead of returning
+    if not ok or not resize_keys[key] then break end
+    vim.cmd(resize_keys[key])
+  end
+  vim.api.nvim_echo({}, false, {})
+end
+map("n", "<C-w>r", resize_mode, { desc = "Resize mode (h/j/k/l)" })
 -- }
 
 -- Bootstrap lazy.nvim plugin manager {

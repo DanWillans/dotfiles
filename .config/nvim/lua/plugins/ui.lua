@@ -8,7 +8,7 @@ return {
     priority = 1000,   -- ...before other plugins, so the theme is set first
     config = function()
       require("tokyonight").setup({ style = "storm" })
-      vim.cmd.colorscheme("tokyonight")
+      vim.cmd.colorscheme("onedark")
     end,
   },
 
